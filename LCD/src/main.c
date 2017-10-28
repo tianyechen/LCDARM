@@ -124,13 +124,13 @@ void Init_LCD(void){
     Delay(40);
     Pin_Write(RW, 0);
     //set configuration//
-    LCD_Special_Cmd(0b0011); //functionset
-    Delay(1);
+    // LCD_Special_Cmd(0b0011); //functionset
+    // Delay(1);
     LCD_Cmd(0b00100000); //functionset
     Delay(1);
     LCD_Cmd(0b00100000); //functionset
     Delay(1);
-    LCD_Cmd(0b00001110); //display on/off control
+    LCD_Cmd(0b00001100); //display on/off control
     Delay(1);
     LCD_Cmd(0b00000001); //display clear
     Delay(2);

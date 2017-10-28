@@ -1433,6 +1433,8 @@ Discarded input sections
  .text.Enable   0x0000000000000000       0x34 bin/main.o
  .text.Clean_Data
                 0x0000000000000000       0x1c bin/main.o
+ .text.LCD_Special_Cmd
+                0x0000000000000000       0x68 bin/main.o
  .text.LCD_Cmd  0x0000000000000000       0x20 bin/main.o
  .text.LCD_WriteChar
                 0x0000000000000000       0x24 bin/main.o
@@ -1581,7 +1583,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb
 LOAD /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a
 END GROUP
 
-.text           0x0000000000000000      0x6e8
+.text           0x0000000000000000      0x670
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xe0 bin/startup_LPC11xx.o
                 0x0000000000000000                __isr_vector
@@ -1643,25 +1645,22 @@ END GROUP
  .text.LCD_Cnvrt
                 0x000000000000030c       0xa8 bin/main.o
                 0x000000000000030c                LCD_Cnvrt
- .text.LCD_Special_Cmd
-                0x00000000000003b4       0x68 bin/main.o
-                0x00000000000003b4                LCD_Special_Cmd
  .text.Init_LCD
-                0x000000000000041c       0xc4 bin/main.o
-                0x000000000000041c                Init_LCD
+                0x00000000000003b4       0xb4 bin/main.o
+                0x00000000000003b4                Init_LCD
  .text.startup.main
-                0x00000000000004e0       0x68 bin/main.o
-                0x00000000000004e0                main
+                0x0000000000000468       0x68 bin/main.o
+                0x0000000000000468                main
  .text.SystemInit
-                0x0000000000000548       0x44 bin/sysinit.o
-                0x0000000000000548                SystemInit
- .text          0x000000000000058c      0x114 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
-                0x000000000000058c                __udivsi3
-                0x000000000000058c                __aeabi_uidiv
-                0x0000000000000698                __aeabi_uidivmod
- .text          0x00000000000006a0        0x4 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
-                0x00000000000006a0                __aeabi_ldiv0
-                0x00000000000006a0                __aeabi_idiv0
+                0x00000000000004d0       0x44 bin/sysinit.o
+                0x00000000000004d0                SystemInit
+ .text          0x0000000000000514      0x114 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                0x0000000000000514                __udivsi3
+                0x0000000000000514                __aeabi_uidiv
+                0x0000000000000620                __aeabi_uidivmod
+ .text          0x0000000000000628        0x4 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x0000000000000628                __aeabi_ldiv0
+                0x0000000000000628                __aeabi_idiv0
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -1676,42 +1675,42 @@ END GROUP
  *(.dtors)
  *(.rodata*)
  .rodata.wdtOSCRate
-                0x00000000000006a4       0x40 bin/clock_11xx.o
+                0x000000000000062c       0x40 bin/clock_11xx.o
  .rodata.OscRateIn
-                0x00000000000006e4        0x4 bin/main.o
-                0x00000000000006e4                OscRateIn
+                0x000000000000066c        0x4 bin/main.o
+                0x000000000000066c                OscRateIn
  *(.eh_frame*)
 
-.glue_7         0x00000000000006e8        0x0
- .glue_7        0x00000000000006e8        0x0 linker stubs
+.glue_7         0x0000000000000670        0x0
+ .glue_7        0x0000000000000670        0x0 linker stubs
 
-.glue_7t        0x00000000000006e8        0x0
- .glue_7t       0x00000000000006e8        0x0 linker stubs
+.glue_7t        0x0000000000000670        0x0
+ .glue_7t       0x0000000000000670        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000006e8        0x0
- .vfp11_veneer  0x00000000000006e8        0x0 linker stubs
+.vfp11_veneer   0x0000000000000670        0x0
+ .vfp11_veneer  0x0000000000000670        0x0 linker stubs
 
-.v4_bx          0x00000000000006e8        0x0
- .v4_bx         0x00000000000006e8        0x0 linker stubs
+.v4_bx          0x0000000000000670        0x0
+ .v4_bx         0x0000000000000670        0x0 linker stubs
 
-.iplt           0x00000000000006e8        0x0
- .iplt          0x00000000000006e8        0x0 bin/startup_LPC11xx.o
+.iplt           0x0000000000000670        0x0
+ .iplt          0x0000000000000670        0x0 bin/startup_LPC11xx.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000006e8                __exidx_start = .
+                0x0000000000000670                __exidx_start = .
 
-.ARM.exidx      0x00000000000006e8        0x8
+.ARM.exidx      0x0000000000000670        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
  .ARM.exidx.isr_vector
-                0x00000000000006e8        0x8 bin/startup_LPC11xx.o
-                0x00000000000006f0                __exidx_end = .
-                0x00000000000006f0                __etext = .
+                0x0000000000000670        0x8 bin/startup_LPC11xx.o
+                0x0000000000000678                __exidx_end = .
+                0x0000000000000678                __etext = .
 
-.rel.dyn        0x00000000000006f0        0x0
- .rel.iplt      0x00000000000006f0        0x0 bin/startup_LPC11xx.o
+.rel.dyn        0x0000000000000678        0x0
+ .rel.iplt      0x0000000000000678        0x0 bin/startup_LPC11xx.o
 
-.data           0x0000000010000100        0x4 load address 0x00000000000006f0
+.data           0x0000000010000100        0x4 load address 0x0000000000000678
                 0x0000000010000100                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -1736,10 +1735,10 @@ END GROUP
                 0x0000000010000104                . = ALIGN (0x4)
                 0x0000000010000104                __data_end__ = .
 
-.igot.plt       0x0000000010000104        0x0 load address 0x00000000000006f4
+.igot.plt       0x0000000010000104        0x0 load address 0x000000000000067c
  .igot.plt      0x0000000010000104        0x0 bin/startup_LPC11xx.o
 
-.bss            0x0000000010000104        0xc load address 0x00000000000006f4
+.bss            0x0000000010000104        0xc load address 0x000000000000067c
                 0x0000000010000104                . = ALIGN (0x4)
                 0x0000000010000104                __bss_start__ = .
  *(.bss*)
@@ -1795,23 +1794,23 @@ OUTPUT(bin/uart.elf elf32-littlearm)
  .comment       0x000000000000006e       0x6f bin/main.o
  .comment       0x000000000000006e       0x6f bin/sysinit.o
 
-.debug_line     0x0000000000000000     0x1b6e
+.debug_line     0x0000000000000000     0x1b5e
  .debug_line    0x0000000000000000       0x94 bin/startup_LPC11xx.o
  .debug_line    0x0000000000000094      0x300 bin/chip_11xx.o
  .debug_line    0x0000000000000394      0x437 bin/gpio_11xx_2.o
  .debug_line    0x00000000000007cb      0x435 bin/clock_11xx.o
  .debug_line    0x0000000000000c00      0x60e bin/uart_11xx.o
- .debug_line    0x000000000000120e      0x674 bin/main.o
- .debug_line    0x0000000000001882      0x2ec bin/sysinit.o
+ .debug_line    0x000000000000120e      0x664 bin/main.o
+ .debug_line    0x0000000000001872      0x2ec bin/sysinit.o
 
-.debug_info     0x0000000000000000     0x5d9e
+.debug_info     0x0000000000000000     0x5d52
  .debug_info    0x0000000000000000       0x91 bin/startup_LPC11xx.o
  .debug_info    0x0000000000000091       0xfa bin/chip_11xx.o
  .debug_info    0x000000000000018b      0xc81 bin/gpio_11xx_2.o
  .debug_info    0x0000000000000e0c      0x9d0 bin/clock_11xx.o
  .debug_info    0x00000000000017dc     0x1384 bin/uart_11xx.o
- .debug_info    0x0000000000002b60     0x2d24 bin/main.o
- .debug_info    0x0000000000005884      0x51a bin/sysinit.o
+ .debug_info    0x0000000000002b60     0x2cd8 bin/main.o
+ .debug_info    0x0000000000005838      0x51a bin/sysinit.o
 
 .debug_abbrev   0x0000000000000000      0xe2a
  .debug_abbrev  0x0000000000000000       0x12 bin/startup_LPC11xx.o
@@ -1879,11 +1878,11 @@ OUTPUT(bin/uart.elf elf32-littlearm)
  .debug_frame   0x00000000000004a8       0x2c bin/sysinit.o
  .debug_frame   0x00000000000004d4       0x20 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
 
-.debug_loc      0x0000000000000000     0x27ac
+.debug_loc      0x0000000000000000     0x2761
  .debug_loc     0x0000000000000000      0x4ad bin/gpio_11xx_2.o
  .debug_loc     0x00000000000004ad       0xea bin/clock_11xx.o
  .debug_loc     0x0000000000000597      0xaf7 bin/uart_11xx.o
- .debug_loc     0x000000000000108e     0x171e bin/main.o
+ .debug_loc     0x000000000000108e     0x16d3 bin/main.o
 
 Cross Reference Table
 
