@@ -1263,7 +1263,11 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 bin/uart_11xx.o
  .text.Chip_UART_DeInit
                 0x0000000000000000       0x18 bin/uart_11xx.o
+ .text.Chip_UART_Send
+                0x0000000000000000       0x2c bin/uart_11xx.o
  .text.Chip_UART_SendBlocking
+                0x0000000000000000       0x2c bin/uart_11xx.o
+ .text.Chip_UART_Read
                 0x0000000000000000       0x2c bin/uart_11xx.o
  .text.Chip_UART_ReadBlocking
                 0x0000000000000000       0x2c bin/uart_11xx.o
@@ -1426,6 +1430,12 @@ Discarded input sections
  .text          0x0000000000000000        0x0 bin/main.o
  .data          0x0000000000000000        0x0 bin/main.o
  .bss           0x0000000000000000        0x0 bin/main.o
+ .text.Enable   0x0000000000000000       0x34 bin/main.o
+ .text.Clean_Data
+                0x0000000000000000       0x1c bin/main.o
+ .text.LCD_Cmd  0x0000000000000000       0x20 bin/main.o
+ .text.LCD_WriteChar
+                0x0000000000000000       0x24 bin/main.o
  .debug_macro   0x0000000000000000      0x880 bin/main.o
  .debug_macro   0x0000000000000000       0x22 bin/main.o
  .debug_macro   0x0000000000000000       0x87 bin/main.o
@@ -1571,7 +1581,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb
 LOAD /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/libc.a
 END GROUP
 
-.text           0x0000000000000000      0x4f0
+.text           0x0000000000000000      0x6e8
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xe0 bin/startup_LPC11xx.o
                 0x0000000000000000                __isr_vector
@@ -1618,34 +1628,40 @@ END GROUP
  .text.Chip_UART_Init
                 0x00000000000001d4       0x28 bin/uart_11xx.o
                 0x00000000000001d4                Chip_UART_Init
- .text.Chip_UART_Send
-                0x00000000000001fc       0x2c bin/uart_11xx.o
-                0x00000000000001fc                Chip_UART_Send
- .text.Chip_UART_Read
-                0x0000000000000228       0x2c bin/uart_11xx.o
-                0x0000000000000228                Chip_UART_Read
  .text.Chip_UART_SetBaud
-                0x0000000000000254       0x38 bin/uart_11xx.o
-                0x0000000000000254                Chip_UART_SetBaud
+                0x00000000000001fc       0x38 bin/uart_11xx.o
+                0x00000000000001fc                Chip_UART_SetBaud
  .text.SysTick_Handler
-                0x000000000000028c       0x10 bin/main.o
-                0x000000000000028c                SysTick_Handler
+                0x0000000000000234       0x10 bin/main.o
+                0x0000000000000234                SysTick_Handler
  .text.Uart_Setup
-                0x000000000000029c       0x38 bin/main.o
-                0x000000000000029c                Uart_Setup
+                0x0000000000000244       0x38 bin/main.o
+                0x0000000000000244                Uart_Setup
+ .text.GPIO_Setup
+                0x000000000000027c       0x90 bin/main.o
+                0x000000000000027c                GPIO_Setup
+ .text.LCD_Cnvrt
+                0x000000000000030c       0xa8 bin/main.o
+                0x000000000000030c                LCD_Cnvrt
+ .text.LCD_Special_Cmd
+                0x00000000000003b4       0x68 bin/main.o
+                0x00000000000003b4                LCD_Special_Cmd
+ .text.Init_LCD
+                0x000000000000041c       0xc4 bin/main.o
+                0x000000000000041c                Init_LCD
  .text.startup.main
-                0x00000000000002d4       0x7c bin/main.o
-                0x00000000000002d4                main
+                0x00000000000004e0       0x68 bin/main.o
+                0x00000000000004e0                main
  .text.SystemInit
-                0x0000000000000350       0x44 bin/sysinit.o
-                0x0000000000000350                SystemInit
- .text          0x0000000000000394      0x114 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
-                0x0000000000000394                __udivsi3
-                0x0000000000000394                __aeabi_uidiv
-                0x00000000000004a0                __aeabi_uidivmod
- .text          0x00000000000004a8        0x4 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
-                0x00000000000004a8                __aeabi_ldiv0
-                0x00000000000004a8                __aeabi_idiv0
+                0x0000000000000548       0x44 bin/sysinit.o
+                0x0000000000000548                SystemInit
+ .text          0x000000000000058c      0x114 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                0x000000000000058c                __udivsi3
+                0x000000000000058c                __aeabi_uidiv
+                0x0000000000000698                __aeabi_uidivmod
+ .text          0x00000000000006a0        0x4 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                0x00000000000006a0                __aeabi_ldiv0
+                0x00000000000006a0                __aeabi_idiv0
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -1660,42 +1676,42 @@ END GROUP
  *(.dtors)
  *(.rodata*)
  .rodata.wdtOSCRate
-                0x00000000000004ac       0x40 bin/clock_11xx.o
+                0x00000000000006a4       0x40 bin/clock_11xx.o
  .rodata.OscRateIn
-                0x00000000000004ec        0x4 bin/main.o
-                0x00000000000004ec                OscRateIn
+                0x00000000000006e4        0x4 bin/main.o
+                0x00000000000006e4                OscRateIn
  *(.eh_frame*)
 
-.glue_7         0x00000000000004f0        0x0
- .glue_7        0x00000000000004f0        0x0 linker stubs
+.glue_7         0x00000000000006e8        0x0
+ .glue_7        0x00000000000006e8        0x0 linker stubs
 
-.glue_7t        0x00000000000004f0        0x0
- .glue_7t       0x00000000000004f0        0x0 linker stubs
+.glue_7t        0x00000000000006e8        0x0
+ .glue_7t       0x00000000000006e8        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000004f0        0x0
- .vfp11_veneer  0x00000000000004f0        0x0 linker stubs
+.vfp11_veneer   0x00000000000006e8        0x0
+ .vfp11_veneer  0x00000000000006e8        0x0 linker stubs
 
-.v4_bx          0x00000000000004f0        0x0
- .v4_bx         0x00000000000004f0        0x0 linker stubs
+.v4_bx          0x00000000000006e8        0x0
+ .v4_bx         0x00000000000006e8        0x0 linker stubs
 
-.iplt           0x00000000000004f0        0x0
- .iplt          0x00000000000004f0        0x0 bin/startup_LPC11xx.o
+.iplt           0x00000000000006e8        0x0
+ .iplt          0x00000000000006e8        0x0 bin/startup_LPC11xx.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000000004f0                __exidx_start = .
+                0x00000000000006e8                __exidx_start = .
 
-.ARM.exidx      0x00000000000004f0        0x8
+.ARM.exidx      0x00000000000006e8        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
  .ARM.exidx.isr_vector
-                0x00000000000004f0        0x8 bin/startup_LPC11xx.o
-                0x00000000000004f8                __exidx_end = .
-                0x00000000000004f8                __etext = .
+                0x00000000000006e8        0x8 bin/startup_LPC11xx.o
+                0x00000000000006f0                __exidx_end = .
+                0x00000000000006f0                __etext = .
 
-.rel.dyn        0x00000000000004f8        0x0
- .rel.iplt      0x00000000000004f8        0x0 bin/startup_LPC11xx.o
+.rel.dyn        0x00000000000006f0        0x0
+ .rel.iplt      0x00000000000006f0        0x0 bin/startup_LPC11xx.o
 
-.data           0x0000000010000100        0x4 load address 0x00000000000004f8
+.data           0x0000000010000100        0x4 load address 0x00000000000006f0
                 0x0000000010000100                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -1720,10 +1736,10 @@ END GROUP
                 0x0000000010000104                . = ALIGN (0x4)
                 0x0000000010000104                __data_end__ = .
 
-.igot.plt       0x0000000010000104        0x0 load address 0x00000000000004fc
+.igot.plt       0x0000000010000104        0x0 load address 0x00000000000006f4
  .igot.plt      0x0000000010000104        0x0 bin/startup_LPC11xx.o
 
-.bss            0x0000000010000104        0xc load address 0x00000000000004fc
+.bss            0x0000000010000104        0xc load address 0x00000000000006f4
                 0x0000000010000104                . = ALIGN (0x4)
                 0x0000000010000104                __bss_start__ = .
  *(.bss*)
@@ -1779,34 +1795,34 @@ OUTPUT(bin/uart.elf elf32-littlearm)
  .comment       0x000000000000006e       0x6f bin/main.o
  .comment       0x000000000000006e       0x6f bin/sysinit.o
 
-.debug_line     0x0000000000000000     0x18cd
+.debug_line     0x0000000000000000     0x1b6e
  .debug_line    0x0000000000000000       0x94 bin/startup_LPC11xx.o
  .debug_line    0x0000000000000094      0x300 bin/chip_11xx.o
  .debug_line    0x0000000000000394      0x437 bin/gpio_11xx_2.o
  .debug_line    0x00000000000007cb      0x435 bin/clock_11xx.o
  .debug_line    0x0000000000000c00      0x60e bin/uart_11xx.o
- .debug_line    0x000000000000120e      0x3d3 bin/main.o
- .debug_line    0x00000000000015e1      0x2ec bin/sysinit.o
+ .debug_line    0x000000000000120e      0x674 bin/main.o
+ .debug_line    0x0000000000001882      0x2ec bin/sysinit.o
 
-.debug_info     0x0000000000000000     0x43e6
+.debug_info     0x0000000000000000     0x5d9e
  .debug_info    0x0000000000000000       0x91 bin/startup_LPC11xx.o
  .debug_info    0x0000000000000091       0xfa bin/chip_11xx.o
  .debug_info    0x000000000000018b      0xc81 bin/gpio_11xx_2.o
  .debug_info    0x0000000000000e0c      0x9d0 bin/clock_11xx.o
  .debug_info    0x00000000000017dc     0x1384 bin/uart_11xx.o
- .debug_info    0x0000000000002b60     0x136c bin/main.o
- .debug_info    0x0000000000003ecc      0x51a bin/sysinit.o
+ .debug_info    0x0000000000002b60     0x2d24 bin/main.o
+ .debug_info    0x0000000000005884      0x51a bin/sysinit.o
 
-.debug_abbrev   0x0000000000000000      0xda0
+.debug_abbrev   0x0000000000000000      0xe2a
  .debug_abbrev  0x0000000000000000       0x12 bin/startup_LPC11xx.o
  .debug_abbrev  0x0000000000000012       0xa6 bin/chip_11xx.o
  .debug_abbrev  0x00000000000000b8      0x21f bin/gpio_11xx_2.o
  .debug_abbrev  0x00000000000002d7      0x2b0 bin/clock_11xx.o
  .debug_abbrev  0x0000000000000587      0x38c bin/uart_11xx.o
- .debug_abbrev  0x0000000000000913      0x3c1 bin/main.o
- .debug_abbrev  0x0000000000000cd4       0xcc bin/sysinit.o
+ .debug_abbrev  0x0000000000000913      0x44b bin/main.o
+ .debug_abbrev  0x0000000000000d5e       0xcc bin/sysinit.o
 
-.debug_aranges  0x0000000000000000      0x1d0
+.debug_aranges  0x0000000000000000      0x210
  .debug_aranges
                 0x0000000000000000       0x28 bin/startup_LPC11xx.o
  .debug_aranges
@@ -1818,29 +1834,29 @@ OUTPUT(bin/uart.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000100       0x80 bin/uart_11xx.o
  .debug_aranges
-                0x0000000000000180       0x30 bin/main.o
+                0x0000000000000180       0x70 bin/main.o
  .debug_aranges
-                0x00000000000001b0       0x20 bin/sysinit.o
+                0x00000000000001f0       0x20 bin/sysinit.o
 
-.debug_ranges   0x0000000000000000      0x478
+.debug_ranges   0x0000000000000000      0x820
  .debug_ranges  0x0000000000000000       0x20 bin/startup_LPC11xx.o
  .debug_ranges  0x0000000000000020       0x10 bin/chip_11xx.o
  .debug_ranges  0x0000000000000030       0xe8 bin/gpio_11xx_2.o
  .debug_ranges  0x0000000000000118       0xc0 bin/clock_11xx.o
  .debug_ranges  0x00000000000001d8      0x240 bin/uart_11xx.o
- .debug_ranges  0x0000000000000418       0x50 bin/main.o
- .debug_ranges  0x0000000000000468       0x10 bin/sysinit.o
+ .debug_ranges  0x0000000000000418      0x3f8 bin/main.o
+ .debug_ranges  0x0000000000000810       0x10 bin/sysinit.o
 
-.debug_macro    0x0000000000000000      0xa60
+.debug_macro    0x0000000000000000      0xa8a
  .debug_macro   0x0000000000000000      0x16f bin/chip_11xx.o
  .debug_macro   0x000000000000016f      0x16f bin/gpio_11xx_2.o
  .debug_macro   0x00000000000002de      0x16f bin/clock_11xx.o
  .debug_macro   0x000000000000044d      0x16f bin/uart_11xx.o
- .debug_macro   0x00000000000005bc      0x22d bin/main.o
- .debug_macro   0x00000000000007e9       0x52 bin/main.o
- .debug_macro   0x000000000000083b      0x225 bin/sysinit.o
+ .debug_macro   0x00000000000005bc      0x257 bin/main.o
+ .debug_macro   0x0000000000000813       0x52 bin/main.o
+ .debug_macro   0x0000000000000865      0x225 bin/sysinit.o
 
-.debug_str      0x0000000000000000     0xba1b
+.debug_str      0x0000000000000000     0xbb0d
  .debug_str     0x0000000000000000     0x7431 bin/chip_11xx.o
                                        0x75fe (size before relaxing)
  .debug_str     0x0000000000007431      0x6e5 bin/gpio_11xx_2.o
@@ -1849,25 +1865,25 @@ OUTPUT(bin/uart.elf elf32-littlearm)
                                        0x7db4 (size before relaxing)
  .debug_str     0x0000000000008074      0x398 bin/uart_11xx.o
                                        0x7dd8 (size before relaxing)
- .debug_str     0x000000000000840c     0x333a bin/main.o
-                                       0xaac0 (size before relaxing)
- .debug_str     0x000000000000b746      0x2d5 bin/sysinit.o
+ .debug_str     0x000000000000840c     0x342c bin/main.o
+                                       0xabb2 (size before relaxing)
+ .debug_str     0x000000000000b838      0x2d5 bin/sysinit.o
                                        0x7b0d (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x414
+.debug_frame    0x0000000000000000      0x4f4
  .debug_frame   0x0000000000000000       0x2c bin/chip_11xx.o
  .debug_frame   0x000000000000002c       0xa4 bin/gpio_11xx_2.o
  .debug_frame   0x00000000000000d0       0xd8 bin/clock_11xx.o
  .debug_frame   0x00000000000001a8      0x1c8 bin/uart_11xx.o
- .debug_frame   0x0000000000000370       0x58 bin/main.o
- .debug_frame   0x00000000000003c8       0x2c bin/sysinit.o
- .debug_frame   0x00000000000003f4       0x20 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000000370      0x138 bin/main.o
+ .debug_frame   0x00000000000004a8       0x2c bin/sysinit.o
+ .debug_frame   0x00000000000004d4       0x20 /usr/bin/../lib/gcc/arm-none-eabi/6.2.1/thumb/v6-m/libgcc.a(_udivsi3.o)
 
-.debug_loc      0x0000000000000000     0x11dd
+.debug_loc      0x0000000000000000     0x27ac
  .debug_loc     0x0000000000000000      0x4ad bin/gpio_11xx_2.o
  .debug_loc     0x00000000000004ad       0xea bin/clock_11xx.o
  .debug_loc     0x0000000000000597      0xaf7 bin/uart_11xx.o
- .debug_loc     0x000000000000108e      0x14f bin/main.o
+ .debug_loc     0x000000000000108e     0x171e bin/main.o
 
 Cross Reference Table
 
@@ -1962,11 +1978,9 @@ Chip_UART_Init                                    bin/uart_11xx.o
                                                   bin/main.o
 Chip_UART_RXIntHandlerRB                          bin/uart_11xx.o
 Chip_UART_Read                                    bin/uart_11xx.o
-                                                  bin/main.o
 Chip_UART_ReadBlocking                            bin/uart_11xx.o
 Chip_UART_ReadRB                                  bin/uart_11xx.o
 Chip_UART_Send                                    bin/uart_11xx.o
-                                                  bin/main.o
 Chip_UART_SendBlocking                            bin/uart_11xx.o
 Chip_UART_SendRB                                  bin/uart_11xx.o
 Chip_UART_SetBaud                                 bin/uart_11xx.o
@@ -1976,9 +1990,17 @@ Chip_UART_TXIntHandlerRB                          bin/uart_11xx.o
 Chip_WWDT_ClearStatusFlag                         bin/wwdt_11xx.o
 Chip_WWDT_DeInit                                  bin/wwdt_11xx.o
 Chip_WWDT_Init                                    bin/wwdt_11xx.o
+Clean_Data                                        bin/main.o
 Default_Handler                                   bin/startup_LPC11xx.o
+Enable                                            bin/main.o
+GPIO_Setup                                        bin/main.o
 HardFault_Handler                                 bin/startup_LPC11xx.o
 I2C_IRQHandler                                    bin/startup_LPC11xx.o
+Init_LCD                                          bin/main.o
+LCD_Cmd                                           bin/main.o
+LCD_Cnvrt                                         bin/main.o
+LCD_Special_Cmd                                   bin/main.o
+LCD_WriteChar                                     bin/main.o
 NMI_Handler                                       bin/startup_LPC11xx.o
 OscRateIn                                         bin/main.o
                                                   bin/clock_11xx.o
