@@ -987,7 +987,7 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
  52e:	50d1      	str	r1, [r2, r3]
  530:	4a06      	ldr	r2, [pc, #24]	; (54c <main+0x64>)
     LCD_Cnvrt(c);
- 532:	2041      	movs	r0, #65	; 0x41
+ 532:	2070      	movs	r0, #112	; 0x70
  534:	50d4      	str	r4, [r2, r3]
  536:	f7ff fee9 	bl	30c <LCD_Cnvrt>
  53a:	e7fe      	b.n	53a <main+0x52>

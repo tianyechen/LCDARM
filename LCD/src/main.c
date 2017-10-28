@@ -154,7 +154,7 @@ int main(void)
     GPIO_Setup();
     Init_LCD();
     // LCD_WriteChar(0b01010000); //P
-    LCD_WriteChar(0b01000001); //A
+    LCD_WriteChar(0b01110000); //A
 
     // LCD_Cmd(0b00000001); //display clear
     // Delay(2);
