@@ -124,12 +124,12 @@ void Init_LCD(void){
     Delay(40);
     Pin_Write(RW, 0);
     //set configuration//
-    // LCD_Special_Cmd(0b0011); //functionset
-    // Delay(1);
+    LCD_Special_Cmd(0b0011); //functionset
+    Delay(5);
     LCD_Cmd(0b00100000); //functionset
-    Delay(1);
+    Delay(5);
     LCD_Cmd(0b00100000); //functionset
-    Delay(1);
+    Delay(5);
     LCD_Cmd(0b00001100); //display on/off control
     Delay(1);
     LCD_Cmd(0b00000001); //display clear
@@ -154,7 +154,7 @@ int main(void)
     GPIO_Setup();
     Init_LCD();
     // LCD_WriteChar(0b01010000); //P
-    LCD_WriteChar(0b10000000); //A
+    LCD_WriteChar(0b01000001); //A
 
     // LCD_Cmd(0b00000001); //display clear
     // Delay(2);
